@@ -3,11 +3,9 @@ node {
         checkout scm
     }
     stage('Test') {
-        // Voert de unit tests uit zoals beschreven in de README
-        sh 'dotnet test'
+        sh 'docker run --rm -v jenkins-data:/var/jenkins_home -w /var/jenkins_home/workspace/DotNetPipeline mcr.microsoft.com/dotnet/sdk:10.0 dotnet test'
     }
     stage('Deploy') {
-        // Sluit eventuele oude containers en start de nieuwe met Docker Compose
         catchError(buildResult: 'SUCCESS') {
             sh 'docker compose down'
         }
