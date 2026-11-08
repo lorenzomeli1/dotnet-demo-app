@@ -7,7 +7,7 @@ node {
         sh '''
             ssh -i /home/.ssh/jenkins_dmz010 \
               -o BatchMode=yes \
-              -o UserKnownHostsFile=/home/.ssh/known_hosts \
+              -o StrictHostKeyChecking=no \
               vagrant@192.0.2.10 '
                 # 1. Haal de nieuwste code op van jouw GitHub repository
                 if [ -d /home/vagrant/dotnet-demo-app-deploy/.git ]; then
